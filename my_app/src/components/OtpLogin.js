@@ -1,29 +1,19 @@
 import React, { useState } from 'react';
-import logo from './assets/logo.png';
+import { useNavigate } from 'react-router-dom';
+
+
 function OtpLogin() {
   const [mobileNumber, setMobileNumber] = useState('');
   const [otp, setOtp] = useState(Array(6).fill(''));
   const [otpSent, setOtpSent] = useState(false);
+  const navigate = useNavigate(); // Use navigate to redirect
 
-  // Function to handle sending OTP
   const sendOtp = (e) => {
     e.preventDefault();
-    // Add logic to send OTP to the mobile number
-    // Example: fetch('/api/send-otp', { method: 'POST', body: JSON.stringify({ mobileNumber }) })
-    //.then(response => response.json())
-    //.then(data => console.log('OTP sent:', data));
-
-    // Simulate OTP sending for demonstration purposes
-    setTimeout(() => {
-      setOtp([...Array(6).keys()].map(() => Math.floor(Math.random() * 10)));
-      console.log('OTP sent to:', mobileNumber);
-      setOtpSent(true);
-    }, 1000); // Simulate sending OTP after 1 second
     console.log('OTP sent to:', mobileNumber);
     setOtpSent(true);
   };
 
- 
   const handleOtpChange = (element, index) => {
     const newOtp = [...otp];
     newOtp[index] = element.value;
@@ -34,18 +24,23 @@ function OtpLogin() {
     }
   };
 
-   // Function to handle OTP verification
   const verifyOtp = (e) => {
     e.preventDefault();
     const otpCode = otp.join('');
     console.log('OTP entered:', otpCode);
+
+    // Assuming the OTP is verified successfully, navigate to the home page
+    navigate('/home');
   };
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100" >
       {/* Logo and Headline */}
       <div className="text-center mb-8">
-      <img src={logo} alt="Logo" className="h-20 mx-auto " />
+      <h1 className="text-3xl font-bold">
+      <span className="text-orange-500">महा</span>{' '}
+      <span className="text-green-500">SAMPARK</span>
+    </h1>
       </div>
 
       {/* OTP Login Form */}
